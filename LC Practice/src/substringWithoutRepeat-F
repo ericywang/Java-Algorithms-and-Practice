@@ -1,0 +1,53 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        
+        int longest = 1;
+        int nextCleared = 0;
+        int beginLongest = 0;
+        int shortestTogether = s.length();
+        Boolean beginCount = true;
+        
+        Map<Character, Integer> map = new HashMap<>();
+        
+        if(s.length() == 0){
+            return 0;
+        }
+        
+        for(int i = 0; i < s.length(); i++){
+            if(beginCount){
+                beginLongest += 1;
+            }
+            if(map.containsKey(s.charAt(i))){
+                beginCount = false;
+                int tempIndex = i - map.get(s.charAt(i));
+                
+                if(nextCleared < map.get(s.charAt(i)) + 1)
+                    nextCleared = map.get(s.charAt(i)) + 1;
+                
+                map.replace(s.charAt(i), i);
+                
+                if(shortestTogether > tempIndex){
+                    shortestTogether = tempIndex;
+                    if(tempIndex > longest){
+                        longest = tempIndex;
+                    }
+                    
+                }
+                                
+            }
+            map.put(s.charAt(i), i);
+            
+            
+        }
+        
+        if((s.length() - nextCleared) > longest){
+            longest = (s.length() - nextCleared);
+        }
+        
+        if((beginLongest -1) > longest){
+            longest = beginLongest - 1;
+        }
+        
+        return longest;
+    }
+}
