@@ -13,8 +13,7 @@ class Solution {
         }
         
 
-                int[] arr = {0,0};
-                return arr;
+                throw new IllegalArgumentException("No solution");
       
     }
 }
