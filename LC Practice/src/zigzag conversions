@@ -1,0 +1,50 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        int skipStep;
+        int temp=0;
+        String dir = "up";
+        String finalString="";
+        
+        ArrayList<ArrayList<Character>> myList = new ArrayList<>(numRows); 
+        for(int i=0; i < numRows; i++) {
+            myList.add(new ArrayList());
+        }
+        
+        for (int i=0; i < s.length(); i++){
+           myList.get(temp).add(s.charAt(i));
+            
+            if(numRows == 1){
+                
+            }
+            
+            else{
+                if((temp<numRows-1) && dir.equals("up")){
+                    temp++;
+                }
+                else if((temp > 0) && dir.equals("down")){
+                    temp--;
+                }
+                else if(temp==numRows -1){
+                    temp--;
+                    dir="down";
+                }
+                else if(temp==0){
+                    temp++;
+                    dir="up";
+                }                
+            }
+            
+        }
+        
+        for(int y=0;y<numRows;y++)
+            { 
+            for(int z=0;z<myList.get(y).size();z++)
+                finalString=finalString + myList.get(y).get(z);
+            } 
+        return finalString;
+    }
+    
+   
+  
+ 
+} 
