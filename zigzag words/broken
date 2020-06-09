@@ -1,0 +1,134 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        int skipStep;
+        int temp=0;
+        String dir = "up";
+        String finalString="";
+        
+        Map<String, Integer>map = new Map<>(numRows); 
+        
+        for (int i=0; i < s.length(); i++){
+            map.add(temp,s.charAt(i));
+            
+            if(numRows == 1){
+                
+            }
+            
+            else{
+                if((temp<numRows-1) && dir.equals("up")){
+                    temp++;
+                }
+                else if((temp > 0) && dir.equals("down")){
+                    temp--;
+                }
+                else if(temp==numRows -1){
+                    temp--;
+                    dir="down";
+                }
+                else if(temp==0){
+                    temp++;
+                    dir="up";
+                }                
+            }
+            
+        }
+        
+        for(int y=0;y<numRows;y++)
+            { 
+                finalString=finalString + map.get(y);
+                System.out.println(map.get(y));
+            } 
+        return finalString;
+    }
+    
+    class HashNode<Integer, Char> { 
+    int key; 
+    char value; 
+  
+    // Reference to next node 
+    HashNode<Integer, Char> next; 
+  
+    // Constructor 
+    public HashNode(int key, char value) 
+    { 
+        this.key = key; 
+        this.value = value; 
+    } 
+} 
+  
+// Class to represent entire hash table 
+    class Map<Integer, Char> 
+    { 
+        // bucketArray is used to store array of chains 
+        private ArrayList<HashNode<Integer, Char>> bucketArray; 
+
+        // Current capacity of array list 
+        private int numBuckets; 
+
+        // Current size of array list 
+        private int size; 
+
+        // Constructor (Initializes capacity, size and 
+        // empty chains. 
+        public Map(int numRows) 
+        { 
+            bucketArray = new ArrayList<>(); 
+            numBuckets = numRows; 
+            size = 0; 
+
+            // Create empty chains 
+            for (int i = 0; i < numBuckets; i++) 
+                bucketArray.add(null); 
+        } 
+
+        public int size() { return size; } 
+        public boolean isEmpty() { return size() == 0; } 
+        
+
+        // Returns value for a key 
+        public String get(int key) 
+        { 
+            String ret="";
+            // Find head of chain for given key 
+            HashNode<Integer, Char> head = bucketArray.get(key); 
+            // Search key in chain 
+            while (head != null) 
+            { 
+                ret = ret+head.value;
+                head = head.next; 
+            } 
+            return ret;
+        } 
+
+        // Adds a key value pair to hash 
+        public void add(int key, char value) 
+        { 
+            
+            HashNode<Integer, Char> head = bucketArray.get(key); 
+
+            HashNode<Integer, Char> newNode = new HashNode<Integer, Char>(key, value); 
+
+            if (head == null) 
+            { 
+                head = newNode;
+                //System.out.println(head.key);
+                return; 
+            } 
+
+            newNode.next = null; 
+
+            HashNode last = head;  
+            while (last.next != null) 
+                last = last.next; 
+
+            last.next = newNode; 
+            return; 
+            
+            
+
+            // If load factor goes beyond threshold, then 
+            // double hash table size 
+           } 
+        } 
+ 
+    } 
