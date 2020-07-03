@@ -1,0 +1,22 @@
+//the key here is to know that the bottleneck is the smaller length of the two sides, so start from both ends of array and increase the pointer of the shorter side
+class Solution {
+    public int maxArea(int[] height) {
+        int tempArea;
+        int maxArea=0;
+        int start=0;
+        int end = height.length-1;
+        
+        while(start<end){
+            tempArea = Math.min(height[start],height[end])*(end-start);
+            if(tempArea > maxArea)
+                maxArea=tempArea;
+        
+            if(height[start]>height[end])
+                end-=1; 
+            else
+                start+=1; 
+               
+        }
+        return maxArea;
+    }
+}
