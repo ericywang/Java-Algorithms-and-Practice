@@ -1,0 +1,93 @@
+class Solution {
+    public String intToRoman(int num) {
+        String answer="";
+        int tempNum=num;
+        int quotient;
+        
+        while(tempNum!=0){
+            if((tempNum/1000)>0){
+                quotient=tempNum/1000;
+                tempNum=tempNum%1000;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"M";
+            }
+            else if((tempNum/900)>0){
+                quotient=tempNum/900;
+                tempNum=tempNum%900;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"CM";
+            }
+            else if((tempNum/500)>0){
+                quotient=tempNum/500;
+                tempNum=tempNum%500;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"D";
+            }
+            else if((tempNum/400)>0){
+                quotient=tempNum/400;
+                tempNum=tempNum%400;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"CD";
+            }
+            else if((tempNum/100)>0){
+                quotient=tempNum/100;
+                tempNum=tempNum%100;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"C";
+            }
+            else if((tempNum/90)>0){
+                quotient=tempNum/90;
+                tempNum=tempNum%90;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"XC";
+            }
+            else if((tempNum/50)>0){
+                quotient=tempNum/50;
+                tempNum=tempNum%50;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"L";
+            }
+            else if((tempNum/40)>0){
+                quotient=tempNum/40;
+                tempNum=tempNum%40;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"XL";
+            }
+            else if((tempNum/10)>0){
+                quotient=tempNum/10;
+                tempNum=tempNum%10;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"X";
+            }
+            else if((tempNum/9)>0){
+                quotient=tempNum/9;
+                tempNum=tempNum%9;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"IX";
+            }
+            else if((tempNum/5)>0){
+                quotient=tempNum/5;
+                tempNum=tempNum%5;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"V";
+            }
+            else if((tempNum/4)>0){
+                quotient=tempNum/4;
+                tempNum=tempNum%4;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"IV";
+            }
+            else if((tempNum/1)>0){
+                quotient=tempNum/1;
+                tempNum=tempNum%1;
+                for(int x=0; x<quotient;x++)
+                    answer=answer+"I";
+            }
+            else{
+
+            }
+        }
+        
+        return answer;
+    }
+}
