@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        boolean[] checked = new boolean[nums.length];
+        List<Integer> permutatedNums= new ArrayList<>();
+        
+        if(nums==null || nums.length==0)
+            return result;
+        
+        permutationHelper(nums, result, checked, permutatedNums);
+        
+        return result;
+    }
+    
+    
+    public void permutationHelper(int[] nums, List<List<Integer>> result, boolean[] checked, List<Integer> permutatedNums){
+        if(permutatedNums.size() == nums.length){
+            result.add(new ArrayList<>(permutatedNums)); //permuatedNums is going to be changed later on so we make a copy rn
+            return;
+        }
+        
+        for(int x = 0; x<nums.length; ++x){
+            if(checked[x])
+                continue;
+            checked[x] = true;
+            permutatedNums.add(nums[x]);
+            
+            permutationHelper(nums, result, checked, permutatedNums);
+            checked[x]=false;
+            permutatedNums.remove(permutatedNums.size() -1);
+        }
+    }
+}
