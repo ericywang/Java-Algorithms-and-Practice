@@ -1,0 +1,71 @@
+//TIME LIMIT REACHED ORIGINAL VER
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        
+        ArrayList<Character> letters = new ArrayList<>();
+        for(int g = 0; g < s1.length(); g++){
+            letters.add(s1.charAt(g));
+        }
+        for(int x = 0; x < (s2.length()-s1.length()+1); x++){
+            ArrayList<Character> lettersTemp = (ArrayList<Character>)letters.clone();
+            for(int y = x; y < x + s2.length(); y++){
+                if(lettersTemp.contains(s2.charAt(y))){
+                    
+                    lettersTemp.remove(lettersTemp.indexOf(s2.charAt(y)));
+                    if(lettersTemp.isEmpty())
+                        return true;
+                }
+                else{
+                    break;
+                }
+                
+            }
+        }
+        return false;
+    }   
+}
+
+
+
+
+
+//BETTER VER USING SLIDING WINDOW
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        
+        int[] s1Map = new int[26];
+        int[] s2Map = new int[26];
+        
+        if(s1.length() > s2.length()){
+            return false;
+        }
+        
+        for(int x = 0; x < s1.length(); x++){
+            s1Map[s1.charAt(x) - 'a']++;
+            s2Map[s2.charAt(x) - 'a']++;
+        }
+        
+        for(int y = 0; y < s2.length() - s1.length(); y++){
+            if(compareMaps(s1Map, s2Map))
+                return true;
+            
+            s2Map[s2.charAt(y + s1.length()) - 'a']++;
+            s2Map[s2.charAt(y) - 'a']--;
+            
+        }
+        
+        return compareMaps(s1Map, s2Map);
+        
+    }
+    
+    
+    public Boolean compareMaps(int[] s1Map, int[] s2Map){
+        for(int z =0; z < 26; z++){
+            if(s1Map[z] != s2Map[z])
+                return false;
+        }
+        return true;
+    }
+}
