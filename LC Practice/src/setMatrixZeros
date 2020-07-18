@@ -1,0 +1,36 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int[][] matrixOrig = new int[matrix.length][matrix[0].length];
+        
+    for (int i = 0; i < matrix.length; i++) {
+      for (int j = 0; j < matrix[0].length; j++) {
+        
+          matrixOrig[i][j] = matrix[i][j];
+
+        
+      }
+    }
+        
+        for(int x = 0; x < matrix.length; x++){
+            for(int y = 0; y < matrix[0].length; y++){
+                if(matrixOrig[x][y] == 0){
+                    setColumns(matrix, y);
+                    setRows(matrix, x);
+                }
+                
+            }
+        }
+    }
+    
+    public void setColumns(int[][]matrix, int horizontalPos){
+        for(int x = 0; x < matrix.length; x++){
+            matrix[x][horizontalPos] = 0;
+        }
+    }
+    
+    public void setRows(int[][]matrix, int verticalPos){
+        for(int x = 0; x < matrix[0].length; x++){
+            matrix[verticalPos][x]= 0;
+        }
+    }
+}
