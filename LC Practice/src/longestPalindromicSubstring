@@ -1,0 +1,36 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        
+        if(s == null || s.length() == 0){
+            return "";
+        }
+        
+        int start = 0;
+        int end = 0;
+        
+        for(int x= 0; x < s.length(); x++){
+            int case1 = countAndFindFromMiddle(s, x, x);
+            int case2 = countAndFindFromMiddle(s, x, x+1);
+            int maxCase = Math.max(case1, case2);
+            
+            if(maxCase > (end-start)) {
+                start = x - ((maxCase-1)/2); //must do -1 in case there is a situation like "abba" where maxCase is 4, and x = 1
+                end = x + ((maxCase)/2); //this one doesnt matter cuz in abba, x is always either middle or towards left(start) side
+            }
+        }
+        
+        return s.substring(start, end + 1);
+        
+    }
+    
+    private int countAndFindFromMiddle(String s, int left, int right){
+        
+        while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+            left--;
+            right++;
+        }
+        return (right-1) - (left + 1) + 1; //dont do right - left + 1 because left and right are changed once more after standards are met so left would equal -1 while right would be 7
+        
+    }
+}
+
