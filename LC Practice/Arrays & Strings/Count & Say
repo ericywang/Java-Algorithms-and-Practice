@@ -1,0 +1,35 @@
+class Solution {
+    public String countAndSay(int n) {
+        
+        return helperMethod(n, "1");
+    }
+    public String helperMethod(int n, String s){
+        if(n == 1){
+            return s;
+        }
+        
+        
+        String returnString = "";
+        char prev = s.charAt(0);
+        int count = 1;
+        
+        for(int x = 1; x < s.length(); x++){
+            if(s.charAt(x) ==  prev){
+                count++;
+            }
+            else{
+                
+                returnString = returnString + Integer.toString(count) + s.charAt(x-1);
+                count = 1;
+                prev = s.charAt(x);
+            }
+                
+                
+        }
+        
+        returnString = returnString + Integer.toString(count) + s.charAt(s.length()-1);
+        
+        return helperMethod(n-1, returnString);
+        
+    }   
+}
