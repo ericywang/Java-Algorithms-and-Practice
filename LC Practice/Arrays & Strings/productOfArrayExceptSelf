@@ -1,0 +1,20 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] solution = new int[nums.length];
+        int[] left = new int[nums.length]; 
+        int[] right = new int[nums.length];
+        
+        left[0] = 1;
+        right[nums.length - 1] = 1;
+        for(int x = 1; x < nums.length; x++){
+            left[x] = left[x-1] * nums[x-1]; //basically left[x] will be holding the product of all the numbers to the left of x, while right[x] will hold all the numbers to the right of x, so when you multiply the two together, you have to product of all the numbers to the left * all the numbers to right, giving you answer. 
+        }
+        for(int x = nums.length -2; x >= 0; x--){
+            right[x] = right[x+1] * nums[x+1];
+        }
+        for(int x = 0; x < nums.length; x++){
+            solution[x] = left[x] * right[x];
+        }
+        return solution;
+    }
+}
