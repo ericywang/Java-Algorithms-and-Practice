@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int widthOfBinaryTree(TreeNode root) {
+        int returnCount = 0;
+        int maxCount = 0;
+        int start = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        
+        if(root == null) return returnCount;
+        root.val = 0;
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            int queueCount = queue.size();
+            returnCount = 0;
+            for(int x = 0; x < queueCount; x++){
+                TreeNode tempNode = queue.remove();
+                if(x == 0) start = tempNode.val;
+                
+                returnCount = tempNode.val - start + 1;
+                if(tempNode.left != null){
+                    tempNode.left.val = 2 * tempNode.val + 1; //use formula to convert array to binary tree. Left child is always 2*parentVal + 1, and right is 2*parentVal + 2
+                    queue.add(tempNode.left);   
+                } 
+                if(tempNode.right != null){
+                    tempNode.right.val = 2 * tempNode.val + 2;
+                    queue.add(tempNode.right);   
+                }               
+            }            
+            if(returnCount > maxCount)
+                maxCount = returnCount;
+        }        
+        return maxCount;        
+    }
+}
