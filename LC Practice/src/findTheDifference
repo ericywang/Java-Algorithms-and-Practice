@@ -1,0 +1,17 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        int[] hashArray = new int[26];
+        
+        for(char c: t.toCharArray()){
+            hashArray[c - 'a']++;
+        }
+        for(char c: s.toCharArray()){
+            hashArray[c - 'a']--;
+        }
+        for(int x = 0; x < 26; x++){
+            if(hashArray[x] != 0) return (char)(x+'a') ;
+        }
+        
+        return ' ';
+    }
+}
