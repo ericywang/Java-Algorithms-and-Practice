@@ -1,0 +1,25 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        ArrayList<List<String>> returnList = new ArrayList<>();
+        HashMap<Integer, ArrayList<String>> map = new HashMap<>();
+        
+        for(String word: strs){
+            int[] stringArray = new int[26];
+            for(char c: word.toCharArray()){
+                stringArray[c - 'a']++;
+            }
+            
+            int myKey = Arrays.hashCode(stringArray);
+            map.putIfAbsent(myKey, new ArrayList<String>());
+            
+            map.get(myKey).add(word);
+            
+        }
+        
+        for(ArrayList<String> list: map.values()){
+            returnList.add(list);
+        }
+        
+        return returnList;
+    }
+}
