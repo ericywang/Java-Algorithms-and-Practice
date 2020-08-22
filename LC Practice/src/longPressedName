@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isLongPressedName(String name, String typed) {
+        int pointer = 0;
+        //char prev = ' ';
+        
+        for(int x = 0; x < typed.length(); x++){
+    
+            if(pointer < name.length() && name.charAt(pointer) == typed.charAt(x)){
+                //prev = name.charAt(pointer);
+                //if(pointer < name.length())
+                    pointer++;               
+            }
+            else if(x > 0 && typed.charAt(x) ==typed.charAt(x-1)){
+                continue;
+            }
+            else{
+                return false;
+            }
+            
+        }
+        
+        
+        return pointer == name.length();
+    }
+}
+
