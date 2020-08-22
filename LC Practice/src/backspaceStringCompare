@@ -1,0 +1,84 @@
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+        
+        if(helperFunction(S).equals(helperFunction(T))) return true;
+        else{
+            return false;
+        }
+        
+    }
+    
+    
+    public String helperFunction(String s){
+        Stack<Character> stack = new Stack<>();
+        
+        for(int x =0; x < s.length(); x++){
+
+            if(s.charAt(x) != '#'){
+                stack.push(s.charAt(x));        
+            }
+            else if(!stack.isEmpty()){  
+                stack.pop();       
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder(); 
+        while(!stack.isEmpty()){
+            sb.append(stack.pop());
+        }    
+        return sb.reverse().toString();
+    }
+}
+
+
+
+
+
+
+//faster runtime, using array instead of stack
+
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+        
+        if(helperFunction(S).equals(helperFunction(T))) return true;
+        else{
+            return false;
+        }
+        
+    }
+    
+    
+    public String helperFunction(String s){
+        //Stack<Character> stack = new Stack<>();
+        char[] stack = new char[s.length()];
+        int top = -1;
+        
+        for(int x =0; x < s.length(); x++){
+
+            if(s.charAt(x) != '#'){
+                //stack.push(s.charAt(x));
+                top++;
+                stack[top] = s.charAt(x);
+            }
+            //else if(!stack.isEmpty()){
+            else if(top != -1){
+                //stack.pop();
+                top--;
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder(); 
+        
+        //while(!stack.isEmpty()){
+        //    sb.append(stack.pop());
+        //}
+        while(top != -1){
+            sb.append(stack[top]);
+            top--;
+        }
+        
+        return sb.reverse().toString();
+    }
+    
+    
+}
