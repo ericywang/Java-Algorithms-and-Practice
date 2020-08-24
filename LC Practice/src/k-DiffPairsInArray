@@ -1,0 +1,22 @@
+class Solution {
+    public int findPairs(int[] nums, int k) {
+        HashMap<Integer, Boolean> map = new HashMap<>();
+        int count = 0;
+        Arrays.sort(nums);
+        for(int x: nums){
+            if(map.containsKey(x-k)){
+                map.put(x, true);
+            }
+            else{
+                map.put((x), false);
+            }
+        }
+        
+        for (Boolean value : map.values()) {
+            if(value == true){
+                count++;
+            }
+        }
+        return count;
+    }
+}
