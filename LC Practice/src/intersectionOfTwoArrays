@@ -1,0 +1,27 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int[] bigger, smaller;
+        HashSet<Integer> set = new HashSet<>();
+        ArrayList<Integer> returnSet = new ArrayList<>() ;      
+        
+        
+        for(int x: nums1){
+            set.add(x);
+        }
+        
+        for(int y: nums2){
+            if(set.contains(y)){                
+                returnSet.add(y);
+                set.remove(y);                
+            }
+        }
+        
+        int[] returnArray = new int[returnSet.size()];
+        
+        for(int x = 0; x < returnSet.size(); x++){
+            returnArray[x] = returnSet.get(x);
+        }
+        
+        return returnArray;
+    }
+}
