@@ -1,0 +1,41 @@
+class Solution {
+    public int numRookCaptures(char[][] board) {
+        int[][] direction = {{0,1},{1,0},{0,-1},{-1,0}};
+        int count=0;
+        
+        for(int col = 0; col < board.length; col++){
+            for(int row = 0; row < board[0].length; row++){
+                if(board[col][row] == 'R'){
+                    for(int x = 0; x < 4; x++){
+                        int adjCol = col + direction[x][0];
+                        int adjRow = row + direction[x][1];
+                        if(adjCol >= 0 && adjCol < board.length && adjRow >= 0 && adjRow < board[0].length){
+                            if(helperMethod(board, adjCol, adjRow, direction[x][0], direction[x][1]))
+                                count++;
+                        }
+                    }
+                }
+                    
+            }
+        }
+        return count;
+    }
+    
+    private Boolean helperMethod (char[][] grid, int col, int row, int dirCol, int dirRow){
+        if(grid[col][row] == '.'){
+            int adjCol = col + dirCol;
+            int adjRow = row + dirRow;
+            if(adjCol >= 0 && adjCol < grid.length && adjRow >= 0 && adjRow < grid[0].length){
+                return helperMethod(grid, col + dirCol, row + dirRow, dirCol, dirRow);
+            }
+            else{
+                return false;
+            }
+        }
+        else if(grid[col][row] == 'p')
+            return true;
+        else{
+            return false;
+        }
+    }
+}
