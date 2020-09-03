@@ -1,0 +1,24 @@
+class Solution {
+    public int longestOnes(int[] A, int K) {
+        int front = 0;
+        int back = 0;
+        int highest = 0;
+        
+        while(back < A.length){
+            if(A[back] == 0){
+                
+                K--;
+            }
+            while(K < 0 && front < A.length){
+                if(A[front] == 0){
+                    K++;
+                }
+                front++;
+            }
+            back++;
+            highest = Math.max(highest, back - front);
+        }
+        
+        return highest;
+    }
+}
