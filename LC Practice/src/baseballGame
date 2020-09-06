@@ -1,0 +1,33 @@
+class Solution {
+    public int calPoints(String[] ops) {
+        int lastValidPointer = -1;
+        int count = 0;
+        Stack<String> stack = new Stack<>();
+        
+        
+        for(int x = 0; x < ops.length; x++){
+            if(ops[x].equals("C") && stack.size() > 0){
+                String temp = stack.pop();
+                count -= Integer.parseInt(temp);
+            }
+            else if(ops[x].equals("D") && stack.size() > 0){
+                int temp = 2 * Integer.parseInt(stack.peek());
+                count += temp;
+                stack.add(String.valueOf(temp));
+            }
+            else if(ops[x].equals("+") && stack.size() >= 2){
+                String temp = stack.pop();
+                int newValue = Integer.parseInt(stack.peek()) + Integer.parseInt(temp);
+                count += newValue;
+                stack.add(temp);
+                stack.add(String.valueOf(newValue));
+            }
+            else{
+                stack.add(ops[x]);
+                count += Integer.parseInt(ops[x]);
+            }
+        }
+        
+        return count;
+    }
+}
