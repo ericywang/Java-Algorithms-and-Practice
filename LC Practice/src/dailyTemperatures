@@ -4,18 +4,14 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         int ind = 0;
         
-        
         for(int x = 0; x < T.length; x++){
-            stack.add(x);
-            while(!stack.isEmpty() && (T[x] < T[x+1])){
-                
-                    ind = stack.pop();
-                
-            }
-            returnArray[ind] = x - ind;
+            
+            while(!stack.isEmpty() && T[stack.peek()] < T[x]){
+                ind = stack.pop();
+                returnArray[ind] = x - ind;
+            }    
+            stack.push(x);               
         }
         return returnArray;
-    }
-    
-    
+    }   
 }
