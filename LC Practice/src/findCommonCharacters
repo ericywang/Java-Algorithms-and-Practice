@@ -1,0 +1,32 @@
+class Solution {
+    public List<String> commonChars(String[] A) {
+        int[] oldArray = new int[26];
+        ArrayList<String> returnList = new ArrayList<>();
+        
+        
+        for(char x: A[0].toCharArray()){
+            oldArray[x - 'a']++;
+        }
+        
+        for(int x = 1; x < A.length; x ++){
+            int[] newArray = new int[26];
+            for(char y: A[x].toCharArray()){
+                if(oldArray[y - 'a'] > 0){
+                    newArray[y - 'a']++;
+                    oldArray[y - 'a']--;
+                }
+            }
+            
+            oldArray = newArray;
+        }
+        
+        for(int x = 0; x < oldArray.length; x++){
+            while(oldArray[x] > 0){
+                returnList.add(String.valueOf((char)(x + 'a')));
+                oldArray[x]--;
+            }
+        }
+        
+        return returnList;
+    }
+}
