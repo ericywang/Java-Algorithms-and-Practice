@@ -1,0 +1,10 @@
+class Solution {
+    public int titleToNumber(String s) {
+        int count = 0;
+        for(char c: s.toCharArray()){
+            count = count*26 + c -'A' + 1;
+        }
+        
+        return count;
+    }
+}
