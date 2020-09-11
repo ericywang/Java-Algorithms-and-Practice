@@ -1,0 +1,24 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        
+        if(matrix.length == 0) return false;
+        int front = 0;
+        int end = matrix.length * matrix[0].length -1;
+        
+        while(front <= end){
+            int mid = (front + end) /2;
+            int midValue = matrix[mid/matrix[0].length][mid % matrix[0].length];
+            
+            if(midValue == target) return true;
+            
+            else if(midValue > target){
+                end = mid-1;
+
+            }
+            else{
+                front = mid+1;
+            }
+        }
+        return false;
+    }
+}
