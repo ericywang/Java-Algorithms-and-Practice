@@ -1,0 +1,17 @@
+class Solution {
+    public int tribonacci(int n) {
+
+        if(n == 0) return 0;
+        if(n == 1 || n == 2)return 1;
+        
+        int[] array = new int [n+1];
+        array[0] = 0;
+        array[1] = 1;
+        array[2] = 1;
+        for(int x = 3; x < array.length; x++){
+            array[x] = array[x-1] + array[x-2] + array[x-3];
+        }
+        return array[n];
+
+    }
+}
