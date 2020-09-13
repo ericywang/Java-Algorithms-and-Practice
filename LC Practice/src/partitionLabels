@@ -1,0 +1,26 @@
+class Solution {
+    public List<Integer> partitionLabels(String S) {
+        int[] map = new int[26];
+        List<Integer> returnList = new ArrayList<>();
+        int biggest = 0;
+        int count = 1;
+        
+        for(int x = 0; x < S.length(); x++){
+            map[S.charAt(x) - 'a'] = x;
+        }
+        
+        for(int x = 0; x < S.length(); x++){
+            biggest = Math.max(biggest, map[S.charAt(x) - 'a']);
+            if(biggest == x){
+                returnList.add(count);
+                count = 1;
+                biggest = 0;
+            }
+            else{
+                count++;
+            }
+        }
+        
+        return returnList;
+    }
+}
