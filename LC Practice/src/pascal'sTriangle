@@ -1,0 +1,28 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> returnList = new ArrayList<>();
+        List<Integer> first = new ArrayList<>();
+        List<Integer> prevRow = new ArrayList<>();
+        
+        if(numRows == 0) return returnList;
+        first.add(1);
+        returnList.add(first);
+        int countRows = 0;
+        
+        while(countRows < numRows-1){
+            List<Integer> nextLine = new ArrayList<>();
+            nextLine.add(1);
+            for(int x = 0; x < countRows; x++){
+                nextLine.add(prevRow.get(x) + prevRow.get(x+1));
+            }
+            nextLine.add(1);
+            returnList.add(nextLine);
+            prevRow = nextLine;
+            countRows++;
+        }
+        
+        return returnList;
+        
+        
+    }
+}
