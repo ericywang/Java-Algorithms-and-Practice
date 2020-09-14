@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isHappy(int n) {
+        HashSet<Integer> set = new HashSet<>();
+        int sum = 0;
+        int currNum = n;
+        
+        while(sum != 1){  
+            sum = 0;
+            while(currNum > 0){
+                int oneDigit = currNum % 10;
+                sum += oneDigit * oneDigit;
+                currNum /= 10;
+            }
+            if(set.contains(sum)) return false;
+            else{
+                set.add(sum);
+            }
+            currNum = sum;  
+        }
+        return true;     
+    }
+}
