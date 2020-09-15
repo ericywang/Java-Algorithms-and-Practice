@@ -1,0 +1,19 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        
+        for(int x = 0; x < nums.length; x++){
+            if(nums[x] <= 0 || nums[x] > nums.length) nums[x] = Integer.MAX_VALUE;
+        }
+        for(int x = 0; x < nums.length; x++){
+            if(Math.abs(nums[x]) <= nums.length){
+                if(nums[Math.abs(nums[x])-1] > 0)
+                   nums[Math.abs(nums[x])-1] = -nums[Math.abs(nums[x])-1];
+            }
+        }
+        for(int x = 0; x < nums.length; x++){
+            if(nums[x] > 0) return x+1;
+        }
+        
+        return nums.length+1;
+    }
+}
