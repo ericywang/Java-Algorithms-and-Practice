@@ -18,17 +18,17 @@ class Solution {
         HashMap<Node, Node> map = new HashMap<>();
         Node originalHead = head;
         
-        while(head.next != null){
+        while(head != null){
             map.put(head, new Node(head.val, null, null));
             head = head.next;
         }
         head=originalHead;
-        while(head.next != null){
+        while(head != null){
             map.get(head).next = map.get(head.next);
             head = head.next;
         }
         head=originalHead;
-        while(head.next != null){
+        while(head != null){
             map.get(head).random = map.get(head.random);
             head = head.next;
         }
