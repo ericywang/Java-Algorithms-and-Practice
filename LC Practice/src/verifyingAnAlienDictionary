@@ -1,29 +1,23 @@
 class Solution {
     public boolean isAlienSorted(String[] words, String order) {
-        int[] index = new int[26];
-        for (int i = 0; i < order.length(); ++i)
-            index[order.charAt(i) - 'a'] = i;
-
-        search: for (int i = 0; i < words.length - 1; ++i) {
-            String word1 = words[i];
-            String word2 = words[i+1];
-
-            // Find the first difference word1[k] != word2[k].
-            for (int k = 0; k < Math.min(word1.length(), word2.length()); ++k) {
-                if (word1.charAt(k) != word2.charAt(k)) {
-                    // If they compare badly, it's not sorted.
-                    if (index[word1.charAt(k) - 'a'] > index[word2.charAt(k) - 'a'])
-                        return false;
-                    continue search;
+        int[] arrayMap = new int[26];
+        for(int x = 0; x < 26; x++){
+            arrayMap[order.charAt(x) - 'a'] = x;
+        }
+        
+        for(int x = 1; x < words.length; x++){
+            boolean valid = false;
+            for(int y = 0; y < Math.min(words[x-1].length(), words[x].length()); y++){
+                if(words[x-1].charAt(y) != words[x].charAt(y)){
+                    if(arrayMap[words[x-1].charAt(y) - 'a'] > arrayMap[words[x].charAt(y) - 'a']) return false;
+                    valid = true;
+                    break;
                 }
             }
 
-            // If we didn't find a first difference, the
-            // words are like ("app", "apple").
-            if (word1.length() > word2.length())
-                return false;
+            if(!valid && words[x-1].length() > words[x].length()) return false;
+            
         }
-
         return true;
     }
 }
